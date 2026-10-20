@@ -1,11 +1,11 @@
+import org.example.ContoBancario;
 import org.example.ImportoNonValidoException;
 import org.example.SaldoInsufficienteExcepion;
 
 import static java.lang.IO.println;
 import static java.lang.IO.readln;
 
-void main(String[] args)
-{
+void main(String[] args) throws Exception {
 //    int saldo = 0;
 //    while (true)
 //    {
@@ -33,4 +33,30 @@ void main(String[] args)
 //            }
 //        }
 //    }
+    int prelievoEccessivo = 100;
+    int depositoNegativo = -1;
+    int depositoValido = 100;
+    int prelievoValido = 10;
+
+    ContoBancario conto = new ContoBancario(50);
+    try {
+        conto.Preleva(prelievoEccessivo);
+    } catch (SaldoInsufficienteExcepion e) {
+        println(e.getMessage());
+    }
+
+    try {
+        conto.Deposita(depositoNegativo);
+    } catch (ImportoNonValidoException e) {
+        println(e.getMessage());
+    }
+
+    try {
+        conto.Preleva(prelievoValido);
+        conto.Deposita(depositoValido);
+    } catch (Exception e)
+    {
+        println(e.getMessage());
+    }
+
 }
